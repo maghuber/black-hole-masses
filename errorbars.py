@@ -8,8 +8,10 @@ from scipy.stats import rv_continuous, norm
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--ngalaxies",type=int,
+parser.add_argument("--ngalaxies",type=int,default=1000,
                     help="number of galaxies")
+parser.add_argument("--all",action='store_true',
+                    help="takes all galaxies in the sample")
 parser.add_argument("--ndraws",type=int,
                     help="number of random draws")
 parser.add_argument("--i",type=str,
@@ -18,7 +20,6 @@ parser.add_argument("--o",type=str,
                     help="output file")
 args = parser.parse_args()
 
-n_galaxies = args.ngalaxies
 n_draws = args.ndraws
 in_file = args.i
 out_file = args.o
@@ -84,6 +85,11 @@ def Mbh_bulge(Mbulge,a,b):
 
 errors = Table.read(in_file,
         format="ascii")
+
+if args.all:
+    n_galaxies = len(errors)
+else:
+    n_galaxies = args.ngalaxies
 
 logMb = np.asarray(errors['logMb'][-n_galaxies:],dtype=float)
 b_logMb = np.asarray(errors['b_logMb'][-n_galaxies:],dtype=float)
