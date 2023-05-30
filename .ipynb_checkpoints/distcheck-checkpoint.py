@@ -53,6 +53,8 @@ def make_distribution(quantity,s1,s2,s):
     errordist = np.zeros((len(quantity),s))
     test_rvs = twosided_gaussian(a=5,b=15)
     for i, q in enumerate(quantity):
+        print(s1)
+        print(s2)
         test_draws = test_rvs.rvs(mu=quantity[i], sig1=s1[i], sig2=s2[i], size=s)
         errordist[i] = (test_draws)
     return errordist
