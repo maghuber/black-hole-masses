@@ -4,7 +4,7 @@
 #SBATCH --mail-user=mahu8801@colorado.edu
 #SBATCH --qos=normal	      		
 #SBATCH --partition=amilan		
-#SBATCH --output=~/scratch/alpine/$USER/output/python_%j.out
+#SBATCH --output=/scratch/alpine/$USER/output/python_%j.out
 
 # Load the python module
 module load python
