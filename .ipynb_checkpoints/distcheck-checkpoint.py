@@ -9,10 +9,6 @@ import argparse
 import pickle
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--ngalaxies",type=int,default=1000,
-                    help="number of galaxies")
-parser.add_argument("--all",action='store_true',
-                    help="takes all galaxies in the sample")
 parser.add_argument("--ndraws",type=int,
                     help="number of random draws")
 parser.add_argument("--i",type=str,
@@ -100,26 +96,21 @@ def Mbh_sigma_noscatter(Mtotal,n,r_e,a,b):
 errors = Table.read(in_file,
         format="ascii")
 
-if args.all:
-    n_galaxies = len(errors)
-else:
-    n_galaxies = args.ngalaxies
-
-logMb = np.asarray(errors['logMb'][-n_galaxies:],dtype=float)
-b_logMb = np.asarray(errors['b_logMb'][-n_galaxies:],dtype=float)
-B_logMb = np.asarray(errors['B_logMb'][-n_galaxies:],dtype=float)
-sig1_Mb = np.asarray(errors['sig1_Mb'][-n_galaxies:],dtype=float)
-sig2_Mb = np.asarray(errors['sig2_Mb'][-n_galaxies:],dtype=float)
-sig1_Mt = np.asarray(errors['sig1_Mt'][-n_galaxies:],dtype=float)
-sig2_Mt = np.asarray(errors['sig1_Mt'][n_galaxies:],dtype=float)
-logMt = np.asarray(errors['logMt'][-n_galaxies:],dtype=float)
-b_logMt = np.asarray(errors['b_logMt'][-n_galaxies:],dtype=float)
-B_logMt = np.asarray(errors['B_logMt'][-n_galaxies:],dtype=float)
-ng = np.asarray(errors['ng'][-n_galaxies:],dtype=float)
-e_ng = np.asarray(errors['e_ng'][-n_galaxies:],dtype=float)
-Rhl = np.asarray(errors['Rhlr'][-n_galaxies:],dtype=float)
-e = np.asarray(errors['e'][-n_galaxies:],dtype=float)
-e_e = np.asarray(errors['e_e'][-n_galaxies:],dtype=float)
+logMb = np.asarray(errors['logMb'],dtype=float)
+b_logMb = np.asarray(errors['b_logMb'],dtype=float)
+B_logMb = np.asarray(errors['B_logMb'],dtype=float)
+sig1_Mb = np.asarray(errors['sig1_Mb'],dtype=float)
+sig2_Mb = np.asarray(errors['sig2_Mb'],dtype=float)
+sig1_Mt = np.asarray(errors['sig1_Mt'],dtype=float)
+sig2_Mt = np.asarray(errors['sig1_Mt'],dtype=float)
+logMt = np.asarray(errors['logMt'],dtype=float)
+b_logMt = np.asarray(errors['b_logMt'],dtype=float)
+B_logMt = np.asarray(errors['B_logMt'],dtype=float)
+ng = np.asarray(errors['ng'],dtype=float)
+e_ng = np.asarray(errors['e_ng'],dtype=float)
+Rhl = np.asarray(errors['Rhlr'],dtype=float)
+e = np.asarray(errors['e'],dtype=float)
+e_e = np.asarray(errors['e_e'],dtype=float)
 
 logMb_dist = make_distribution(logMb,sig1_Mb,sig2_Mb,n_draws)
 logMt_dist = make_distribution(logMt,sig1_Mt,sig2_Mt,n_draws)
