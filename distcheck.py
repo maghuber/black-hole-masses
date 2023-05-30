@@ -177,7 +177,11 @@ my_data = {'logMbh_s_dist': logMbh_s_dist[largestdiffs],
            'b_median': logMbh_b_median[largestdiffs],
            's_median': logMbh_s_median[largestdiffs],
            's_noerr' : logMbh_s_noerr[largestdiffs],
-           'b_noerr' : logMbh_b_noerr[largestdiffs]}
+           'b_noerr' : logMbh_b_noerr[largestdiffs],
+           'logMtdist' : logMt_dist[largestdiffs],
+           'logMbdist' : logMb_dist[largestdiffs],
+           'logMt' : logMt[largestdiffs],
+           'logMb' : logMb[largestdiffs]}
 
 output = open(out_file, 'wb')
 pickle.dump(my_data, output)
