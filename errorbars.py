@@ -8,9 +8,9 @@ from scipy.stats import rv_continuous, norm
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--ngalaxies",type=float,
+parser.add_argument("--ngalaxies",type=int,
                     help="number of galaxies")
-parser.add_argument("--ndraws",type=float,
+parser.add_argument("--ndraws",type=int,
                     help="number of random draws")
 parser.add_argument("--i",type=str,
                     help="input file")
@@ -130,19 +130,19 @@ for i in np.arange(n_galaxies):
         Mbulge = 10**logMb_dist[i][j]
         logMbh_b_dist[i][j] = Mbh_bulge(Mbulge,alpha,beta)
 
-logMbh_s_mean = np.zeros(n_galaxies)
+logMbh_s_median = np.zeros(n_galaxies)
 logMbh_s_err = np.zeros(n_galaxies)
-logMbh_b_mean = np.zeros(n_galaxies)
+logMbh_b_median = np.zeros(n_galaxies)
 logMbh_b_err = np.zeros(n_galaxies)
 for i in np.arange(n_galaxies):
-    logMbh_s_mean[i] = np.around(np.mean(logMbh_s_dist[i]),3)
-    logMbh_b_mean[i] = np.around(np.mean(logMbh_b_dist[i]),3)
+    logMbh_s_median[i] = np.around(np.median(logMbh_s_dist[i]),3)
+    logMbh_b_median[i] = np.around(np.median(logMbh_b_dist[i]),3)
     logMbh_s_err[i] = np.around(np.std(logMbh_s_dist[i]),3)
     logMbh_b_err[i] = np.around(np.std(logMbh_b_dist[i]),3)
 
-arr = {'logMbh_s': logMbh_s_mean,
+arr = {'logMbh_s': logMbh_s_median,
        'err_logMbh_s': logMbh_s_err,
-       'logMbh_b': logMbh_b_mean,
+       'logMbh_b': logMbh_b_median,
        'err_logMbh_b': logMbh_b_err}
 table = Table(arr)
 
