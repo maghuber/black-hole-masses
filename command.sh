@@ -13,4 +13,4 @@ conda activate blackhole_env
 
 # Run Python Script
 cd /scratch/alpine/mahu8801/blackhole_data/scripts
-python errorbars.py --ngalaxies=1000 --ndraws=100 --i='/scratch/alpine/mahu8801/blackhole_data/data/errors.dat' --o='/scratch/alpine/mahu8801/blackhole_data/data/bhmasses.dat'
+python errorbars.py --ngalaxies=1000 --ndraws=1000 --i='/scratch/alpine/mahu8801/blackhole_data/data/errors.dat' --o='/scratch/alpine/mahu8801/blackhole_data/data/bhmasses_1000draws.dat'
