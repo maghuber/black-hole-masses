@@ -15,8 +15,6 @@ parser.add_argument("--all",action='store_true',
                     help="takes all galaxies in the sample")
 parser.add_argument("--ndraws",type=int,
                     help="number of random draws")
-parser.add_argument("--ndiff",type=int,
-                    help="number of largest differences")
 parser.add_argument("--i",type=str,
                     help="input file")
 parser.add_argument("--o",type=str,
@@ -85,6 +83,19 @@ def Mbh_bulge(Mbulge,a,b):
     logMbh = a + b*np.log10(Mbulge/(10**11))
     logMbh_scatter = np.random.normal(logMbh, scatter_b)
     return logMbh_scatter
+
+def Mbh_bulge_noscatter(Mbulge,a,b):
+    M = Mbulge*Msun
+    logMbh = a + b*np.log10(Mbulge/(10**11))
+    return logMbh
+
+def Mbh_sigma_noscatter(Mtotal,n,r_e,a,b):
+    Kstar = 0.577*(73.32/(10.465+(n-0.94)**2)+0.954)
+    rad = r_e*kpctokm
+    M = Mtotal*Msun
+    sigma = np.sqrt((G*M)/(Kstar*rad))
+    logMbh = a + b*np.log10(sigma/200)
+    return logMbh
 
 errors = Table.read(in_file,
         format="ascii")
@@ -155,33 +166,25 @@ for i in np.arange(n_galaxies):
     beta = beta_s
     r_e = Rhl[i]*np.sqrt(1-e[i])
     Mtot = 10**(logMt[i])
-    logMbh_s_noerr[i] = Mbh_sigma(Mtot,ng[i],r_e,alpha,beta)
+    logMbh_s_noerr[i] = Mbh_sigma_noscatter(Mtot,ng[i],r_e,alpha,beta)
         
 logMbh_b_noerr = np.zeros(n_galaxies)
 for i in np.arange(n_galaxies):
     alpha = alpha_b
     beta = beta_b
     Mbulge = 10**logMb[i]
-    logMbh_b_noerr[i] = Mbh_bulge(Mbulge,alpha,beta)
+    logMbh_b_noerr[i] = Mbh_bulge_noscatter(Mbulge,alpha,beta)
 
-diff = np.zeros(n_galaxies)
-for i in range(n_galaxies):
-    diffx = logMbh_b_noerr[i] - logMbh_b_median[i]
-    diffy = logMbh_s_noerr[i] - logMbh_s_median[i]
-    diff[i] = np.sqrt(diffx**2+diffy**2)
-    
-largestdiffs = np.argsort(diff)[-args.ndiff:]
-
-my_data = {'logMbh_s_dist': logMbh_s_dist[largestdiffs],
-           'logMbh_b_dist': logMbh_b_dist[largestdiffs],
-           'b_median': logMbh_b_median[largestdiffs],
-           's_median': logMbh_s_median[largestdiffs],
-           's_noerr' : logMbh_s_noerr[largestdiffs],
-           'b_noerr' : logMbh_b_noerr[largestdiffs],
-           'logMtdist' : logMt_dist[largestdiffs],
-           'logMbdist' : logMb_dist[largestdiffs],
-           'logMt' : logMt[largestdiffs],
-           'logMb' : logMb[largestdiffs]}
+my_data = {'logMbh_s_dist': logMbh_s_dist,
+           'logMbh_b_dist': logMbh_b_dist,
+           'b_median': logMbh_b_median,
+           's_median': logMbh_s_median,
+           's_noerr' : logMbh_s_noerr,
+           'b_noerr' : logMbh_b_noerr,
+           'logMtdist' : logMt_dist,
+           'logMbdist' : logMb_dist,
+           'logMt' : logMt,
+           'logMb' : logMb}
 
 output = open(out_file, 'wb')
 pickle.dump(my_data, output)

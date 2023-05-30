@@ -13,4 +13,4 @@ conda activate blackhole_env
 
 # Run Python Script
 cd /scratch/alpine/mahu8801/blackhole_data/scripts
-python distcheck.py --ngalaxies=1000 --ndraws=100 --ndiff=10 --i='/scratch/alpine/mahu8801/blackhole_data/data/errors.dat' --o='/scratch/alpine/mahu8801/blackhole_data/data/difference_data_2.pkl' 
+python distcheck.py --all --ndraws=100 --i='/scratch/alpine/mahu8801/blackhole_data/data/largest_skew_10ngal.dat' --o='/scratch/alpine/mahu8801/blackhole_data/data/skewed_dist_test.pkl' 
