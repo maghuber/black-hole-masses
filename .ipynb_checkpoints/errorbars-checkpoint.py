@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 from astropy.table import Table
 import numpy as np
 from astropy.io import ascii

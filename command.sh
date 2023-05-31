@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --time=0:90:00			
+#SBATCH --time=0:130:00			
 #SBATCH --mail-type=all
 #SBATCH --mail-user=mahu8801@colorado.edu
 #SBATCH --qos=normal	      		
@@ -13,4 +13,4 @@ conda activate blackhole_env
 
 # Run Python Script
 cd /scratch/alpine/mahu8801/blackhole_data/scripts
-python errorbars.py --ngalaxies=1000 --ndraws=1000 --i='/scratch/alpine/mahu8801/blackhole_data/data/errors.dat' --o='/scratch/alpine/mahu8801/blackhole_data/data/1000draws.dat'
+python errorbars.py --ngalaxies=1000 --ndraws=500 --i='/scratch/alpine/mahu8801/blackhole_data/data/errors.dat' --o='/scratch/alpine/mahu8801/blackhole_data/data/500draws.dat'
