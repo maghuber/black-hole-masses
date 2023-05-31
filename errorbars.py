@@ -107,11 +107,6 @@ e_ng = np.asarray(errors['e_ng'][indices],dtype=float)
 Rhl = np.asarray(errors['Rhlr'][indices],dtype=float)
 e = np.asarray(errors['e'][indices],dtype=float)
 e_e = np.asarray(errors['e_e'][indices],dtype=float)
-fwhm = np.asarray(errors['FWHM-BHb'][indices],dtype=float)
-e_fwhm = np.asarray(errors['e_FWHM-BHb'][indices],dtype=float)
-logL5100 = np.asarray(errors['logL5100'][indices],dtype=float)
-e_logL5100 = np.asarray(errors['e_logL5100'][indices],dtype=float)
-
 
 logMb_dist = make_distribution(logMb,sig1_Mb,sig2_Mb,n_draws)
 logMt_dist = make_distribution(logMt,sig1_Mt,sig2_Mt,n_draws)
