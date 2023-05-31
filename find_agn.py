@@ -21,7 +21,7 @@ agn = ascii.read(args.agnfile)
 obj = ascii.read(args.samplefile)
 
 agnskycoord = SkyCoord(ra=agn['RAdeg'], dec=agn['DEdeg'])
-objskycoord = SkyCoord(ra=obj['ra']*u.degree, dec=obj['dec']*u.degree)
+objskycoord = SkyCoord(ra=np.asarray(obj['_RA'],dtype=float)*u.degree, dec=np.asarray(obj['_DE'],dtype=float)*u.degree)
 
 max_sep = 1 * u.arcsec
 idx, d2d, d3d = agnskycoord.match_to_catalog_3d(objskycoord)
@@ -31,7 +31,7 @@ agn_matches = objskycoord[idx[sep_constraint]]
 broadlines = agn[sep_constraint]
 scaling = obj[idx[sep_constraint]]
 
-columns = [broadlines['ID'],broadlines['FWHM_BHB'],broadlines['FWHM_BHB_ERR'],broadlines['L5100'],broadlines['L5100_ERR']]
+columns = [broadlines['ID'],broadlines['FWHM-BHb'],broadlines['e_FWHM-BHb'],broadlines['logL5100'],broadlines['e_logL5100']]
 for column in columns:
     scaling.add_column(column)
     

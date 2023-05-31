@@ -88,24 +88,31 @@ errors = Table.read(in_file,
 
 if args.all:
     n_galaxies = len(errors)
+    indices = np.s_[:n_galaxies]
 else:
     n_galaxies = args.ngalaxies
+    indices = np.s_[-n_galaxies:]
 
-logMb = np.asarray(errors['logMb'][-n_galaxies:],dtype=float)
-b_logMb = np.asarray(errors['b_logMb'][-n_galaxies:],dtype=float)
-B_logMb = np.asarray(errors['B_logMb'][-n_galaxies:],dtype=float)
-sig1_Mb = np.asarray(errors['sig1_Mb'][-n_galaxies:],dtype=float)
-sig2_Mb = np.asarray(errors['sig2_Mb'][-n_galaxies:],dtype=float)
-sig1_Mt = np.asarray(errors['sig1_Mt'][-n_galaxies:],dtype=float)
+logMb = np.asarray(errors['logMb'][indices],dtype=float)
+b_logMb = np.asarray(errors['b_logMb'][indices],dtype=float)
+B_logMb = np.asarray(errors['B_logMb'][indices],dtype=float)
+sig1_Mb = np.asarray(errors['sig1_Mb'][indices],dtype=float)
+sig2_Mb = np.asarray(errors['sig2_Mb'][indices],dtype=float)
+sig1_Mt = np.asarray(errors['sig1_Mt'][indices],dtype=float)
 sig2_Mt = np.asarray(errors['sig1_Mt'][n_galaxies:],dtype=float)
-logMt = np.asarray(errors['logMt'][-n_galaxies:],dtype=float)
-b_logMt = np.asarray(errors['b_logMt'][-n_galaxies:],dtype=float)
-B_logMt = np.asarray(errors['B_logMt'][-n_galaxies:],dtype=float)
-ng = np.asarray(errors['ng'][-n_galaxies:],dtype=float)
-e_ng = np.asarray(errors['e_ng'][-n_galaxies:],dtype=float)
-Rhl = np.asarray(errors['Rhlr'][-n_galaxies:],dtype=float)
-e = np.asarray(errors['e'][-n_galaxies:],dtype=float)
-e_e = np.asarray(errors['e_e'][-n_galaxies:],dtype=float)
+logMt = np.asarray(errors['logMt'][indices],dtype=float)
+b_logMt = np.asarray(errors['b_logMt'][indices],dtype=float)
+B_logMt = np.asarray(errors['B_logMt'][indices],dtype=float)
+ng = np.asarray(errors['ng'][indices],dtype=float)
+e_ng = np.asarray(errors['e_ng'][indices],dtype=float)
+Rhl = np.asarray(errors['Rhlr'][indices],dtype=float)
+e = np.asarray(errors['e'][indices],dtype=float)
+e_e = np.asarray(errors['e_e'][indices],dtype=float)
+fwhm = np.asarray(errors['FWHM-BHb'][indices],dtype=float)
+e_fwhm = np.asarray(errors['e_FWHM-BHb'][indices],dtype=float)
+logL5100 = np.asarray(errors['logL5100'][indices],dtype=float)
+e_logL5100 = np.asarray(errors['e_logL5100'][indices],dtype=float)
+
 
 logMb_dist = make_distribution(logMb,sig1_Mb,sig2_Mb,n_draws)
 logMt_dist = make_distribution(logMt,sig1_Mt,sig2_Mt,n_draws)
