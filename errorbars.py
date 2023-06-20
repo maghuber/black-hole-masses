@@ -91,7 +91,8 @@ if args.all:
 else:
     n_galaxies = args.ngalaxies
     indices = np.s_[-n_galaxies:]
-
+    
+objid = np.asarray(errors['objID'][indices],dtype=float)
 logMb = np.asarray(errors['logMb'][indices],dtype=float)
 b_logMb = np.asarray(errors['b_logMb'][indices],dtype=float)
 B_logMb = np.asarray(errors['B_logMb'][indices],dtype=float)
@@ -108,10 +109,11 @@ Rhl = np.asarray(errors['Rhlr'][indices],dtype=float)
 e = np.asarray(errors['e'][indices],dtype=float)
 e_e = np.asarray(errors['e_e'][indices],dtype=float)
 
-logMb_dist = make_distribution(logMb,sig1_Mb,sig2_Mb,n_draws)
-logMt_dist = make_distribution(logMt,sig1_Mt,sig2_Mt,n_draws)
-ng_dist = make_distribution_normal(ng,e_ng,n_draws)
-e_dist = make_distribution_normal(e,e_e,n_draws)
+for n in range(1,n_draws/100):
+    logMb_dist = make_distribution(logMb,sig1_Mb,sig2_Mb,100)
+    logMt_dist = make_distribution(logMt,sig1_Mt,sig2_Mt,100)
+    ng_dist = make_distribution_normal(ng,e_ng,100)
+    e_dist = make_distribution_normal(e,e_e,n_draws)
 
 # make coefficient distributions
 alpha_s_dist = make_distribution_normal(np.full((n_galaxies,),alpha_s),np.full((n_galaxies,),e_alpha_s),n_draws)
@@ -147,7 +149,8 @@ for i in np.arange(n_galaxies):
     logMbh_s_err[i] = np.around(np.std(logMbh_s_dist[i]),3)
     logMbh_b_err[i] = np.around(np.std(logMbh_b_dist[i]),3)
 
-arr = {'logMbh_s': logMbh_s_median,
+arr = {'objID' : objid,
+       'logMbh_s': logMbh_s_median,
        'err_logMbh_s': logMbh_s_err,
        'logMbh_b': logMbh_b_median,
        'err_logMbh_b': logMbh_b_err}

@@ -15,4 +15,4 @@ conda activate blackhole_env
 
 # Run Python Script
 cd /scratch/alpine/mahu8801/blackhole_data/scripts
-python errorbars.py --all --ndraws=500 --i='/scratch/alpine/mahu8801/blackhole_data/data/largest_skew_100ngal.dat' --o='/scratch/alpine/mahu8801/blackhole_data/data/500draws.dat'
+python errorbars.py --all --ndraws=100 --i='/scratch/alpine/mahu8801/blackhole_data/data/largest_skew_100ngal.dat' --o='/scratch/alpine/mahu8801/blackhole_data/data/100draws.dat'

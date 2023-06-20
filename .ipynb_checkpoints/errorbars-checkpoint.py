@@ -91,7 +91,8 @@ if args.all:
 else:
     n_galaxies = args.ngalaxies
     indices = np.s_[-n_galaxies:]
-
+    
+objid = np.asarray(errors['objID'][indices],dtype=float)
 logMb = np.asarray(errors['logMb'][indices],dtype=float)
 b_logMb = np.asarray(errors['b_logMb'][indices],dtype=float)
 B_logMb = np.asarray(errors['B_logMb'][indices],dtype=float)
@@ -147,7 +148,8 @@ for i in np.arange(n_galaxies):
     logMbh_s_err[i] = np.around(np.std(logMbh_s_dist[i]),3)
     logMbh_b_err[i] = np.around(np.std(logMbh_b_dist[i]),3)
 
-arr = {'logMbh_s': logMbh_s_median,
+arr = {'objID' : objid,
+       'logMbh_s': logMbh_s_median,
        'err_logMbh_s': logMbh_s_err,
        'logMbh_b': logMbh_b_median,
        'err_logMbh_b': logMbh_b_err}
