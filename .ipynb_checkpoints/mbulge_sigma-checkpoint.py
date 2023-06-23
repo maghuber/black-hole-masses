@@ -7,8 +7,10 @@ from scipy.stats import rv_continuous, norm
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--ngalaxies",type=int,default=1000,
-                    help="number of galaxies")
+parser.add_argument("--slice1",type=int,default=0,
+                    help="lower slice of galaxy table")
+parser.add_argument("--slice2",type=int,default=1000,
+                    help="upper slice of galaxy table")
 parser.add_argument("--all",action='store_true',
                     help="takes all galaxies in the sample")
 parser.add_argument("--ndraws",type=int,
@@ -86,11 +88,10 @@ errors = Table.read(in_file,
         format="ascii")
 
 if args.all:
-    n_galaxies = len(errors)
+    n_galaxies = len(errors)s
     indices = np.s_[:n_galaxies]
 else:
-    n_galaxies = args.ngalaxies
-    indices = np.s_[-n_galaxies:]
+    indices = np.s_[args.slice1:args.slice2]
     
 objid = np.asarray(errors['objID'][indices],dtype=float)
 logMb = np.asarray(errors['logMb'][indices],dtype=float)
