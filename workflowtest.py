@@ -12,6 +12,6 @@ filedata = filedata.replace('1000draws', '%i_%i'%(slice1,slice2))
 with open('/scratch/alpine/mahu8801/blackhole_data/scripts/commands/%i_%i.sh'%(slice1,slice2), 'w') as file:
     file.write(filedata)
         
-subprocess.run("sbatch /scratch/alpine/mahu8801/blackhole_data/scripts/commands/%i_%i.sh"%(slice1,slice2))
+subprocess.run(["sbatch", "/scratch/alpine/mahu8801/blackhole_data/scripts/commands/%i_%i.sh"%(slice1,slice2)],capture_output=True)
     
         
