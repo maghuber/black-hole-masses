@@ -88,7 +88,7 @@ errors = Table.read(in_file,
         format="ascii")
 
 if args.all:
-    n_galaxies = len(errors)s
+    n_galaxies = len(errors)
     indices = np.s_[:n_galaxies]
 else:
     indices = np.s_[args.slice1:args.slice2]
