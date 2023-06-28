@@ -88,7 +88,7 @@ errors = Table.read(in_file,
 
 indices = np.s_[args.slice1:args.slice2]
     
-objid = np.asarray(errors['objID'][indices],dtype=float)
+objid = np.asarray(errors['objID'][indices],dtype=str)
 logMb = np.asarray(errors['logMb'][indices],dtype=float)
 b_logMb = np.asarray(errors['b_logMb'][indices],dtype=float)
 B_logMb = np.asarray(errors['B_logMb'][indices],dtype=float)
