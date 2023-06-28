@@ -8,7 +8,7 @@ for i in range(539):
         slice2 = (i+1)*1000
         
     with open('/scratch/alpine/mahu8801/blackhole_data/scripts/commands/command.sh', 'r') as file :
-    filedata = file.read()
+    	filedata = file.read()
         
     filedata = filedata.replace('--slice1=0', '--slice1=%i'%(slice1))
     filedata = filedata.replace('--slice2=1000', '--slice2=%i'%(slice2))
