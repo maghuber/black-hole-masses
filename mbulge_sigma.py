@@ -11,8 +11,6 @@ parser.add_argument("--slice1",type=int,default=0,
                     help="lower slice of galaxy table")
 parser.add_argument("--slice2",type=int,default=1000,
                     help="upper slice of galaxy table")
-parser.add_argument("--all",action='store_true',
-                    help="takes all galaxies in the sample")
 parser.add_argument("--ndraws",type=int,
                     help="number of random draws")
 parser.add_argument("--i",type=str,
@@ -22,6 +20,7 @@ parser.add_argument("--o",type=str,
 args = parser.parse_args()
 
 n_draws = args.ndraws
+n_galaxies = args.slice2 - args.slice1
 in_file = args.i
 out_file = args.o
 
@@ -87,11 +86,7 @@ def Mbh_bulge(Mbulge,a,b):
 errors = Table.read(in_file,
         format="ascii")
 
-if args.all:
-    n_galaxies = len(errors)
-    indices = np.s_[:n_galaxies]
-else:
-    indices = np.s_[args.slice1:args.slice2]
+indices = np.s_[args.slice1:args.slice2]
     
 objid = np.asarray(errors['objID'][indices],dtype=float)
 logMb = np.asarray(errors['logMb'][indices],dtype=float)
