@@ -8,10 +8,6 @@ from scipy.stats import rv_continuous, norm
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--ngalaxies",type=int,default=1000,
-                    help="number of galaxies")
-parser.add_argument("--all",action='store_true',
-                    help="takes all galaxies in the sample")
 parser.add_argument("--ndraws",type=int,
                     help="number of random draws")
 parser.add_argument("--i",type=str,
@@ -34,7 +30,7 @@ G = const.G.to('km3 / (kg s2)').value
 def make_distribution_normal(quantity,sigma,s):
     errordist = np.zeros((len(quantity),s))
     for i, q in enumerate(quantity):
-        test_draws = np.random.normal(quantity[i], sigma[i], s)
+        test_draws = np.random.normal(quantity[i], sigma[i], size=s)
         errordist[i] = (test_draws)
     return errordist
 
@@ -49,17 +45,12 @@ def Mbh_Hb(FWHMHb,L5100):
 errors = Table.read(in_file,
         format="ascii")
 
-if args.all:
-    n_galaxies = len(errors)
-    indices = np.s_[:n_galaxies]
-else:
-    n_galaxies = args.ngalaxies
-    indices = np.s_[-n_galaxies:]
+n_galaxies = len(errors)
 
-fwhm = np.asarray(errors['FWHM-BHb'][indices],dtype=float)
-e_fwhm = np.asarray(errors['e_FWHM-BHb'][indices],dtype=float)
-logL5100 = np.asarray(errors['logL5100'][indices],dtype=float)
-e_logL5100 = np.asarray(errors['e_logL5100'][indices],dtype=float)
+fwhm = np.asarray(errors['FWHM-BHb'],dtype=float)
+e_fwhm = np.asarray(errors['e_FWHM-BHb'],dtype=float)
+logL5100 = np.asarray(errors['logL5100'],dtype=float)
+e_logL5100 = np.asarray(errors['e_logL5100'],dtype=float)
 
 fwhm_dist = make_distribution_normal(fwhm,e_fwhm,n_draws)
 logL5100_dist = make_distribution_normal(logL5100,e_logL5100,n_draws)
