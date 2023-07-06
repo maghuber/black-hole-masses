@@ -15,4 +15,4 @@ conda activate blackhole_env
 
 # Run Python Script
 cd /scratch/alpine/mahu8801/blackhole_data/scripts
-python errorbars_broadlines.py --all --ndraws=500 --i='/scratch/alpine/mahu8801/blackhole_data/data/agn_quantities.dat' --o='/scratch/alpine/mahu8801/blackhole_data/data/broadlinemasses.dat'
+python errorbars_broadlines.py --ndraws=500 --i='/scratch/alpine/mahu8801/blackhole_data/data/agn_quantities.dat' --o='/scratch/alpine/mahu8801/blackhole_data/data/broadlinemasses.dat'
