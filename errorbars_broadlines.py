@@ -51,6 +51,7 @@ fwhm = np.asarray(errors['FWHM-BHb'],dtype=float)
 e_fwhm = np.asarray(errors['e_FWHM-BHb'],dtype=float)
 logL5100 = np.asarray(errors['logL5100'],dtype=float)
 e_logL5100 = np.asarray(errors['e_logL5100'],dtype=float)
+objID = np.asarray(errors['objID'],dtype=int)
 
 fwhm_dist = make_distribution_normal(fwhm,e_fwhm,n_draws)
 logL5100_dist = make_distribution_normal(logL5100,e_logL5100,n_draws)
@@ -68,7 +69,8 @@ for i in np.arange(n_galaxies):
     logMbh_Hb_median[i] = np.around(np.median(logMbh_Hb_dist[i]),3)
     logMbh_Hb_err[i] = np.around(np.std(logMbh_Hb_dist[i]),3)
 
-arr = {'logMbh_Hb': logMbh_Hb_median,
+arr = {'objID': objID,
+       'logMbh_Hb': logMbh_Hb_median,
        'err_logMbh_Hb': logMbh_Hb_err}
 table = Table(arr)
 
