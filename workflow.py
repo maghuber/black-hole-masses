@@ -1,10 +1,10 @@
 import subprocess 
 import os
 
-for i in range(539):
+for i in range(47):
     slice1 = i*1000
-    if i == 538:
-        slice2 = 538818
+    if i == 46:
+        slice2 = 46663
     else:
         slice2 = (i+1)*1000
         
