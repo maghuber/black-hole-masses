@@ -14,7 +14,7 @@ for i in range(47):
         
     filedata = filedata.replace('--slice1=46000', '--slice1=%i'%(slice1))
     filedata = filedata.replace('--slice2=46488', '--slice2=%i'%(slice2))
-    filedata = filedata.replace('46000_46488..dat', '%i_%i.dat'%(slice1,slice2))
+    filedata = filedata.replace('46000_46488.dat', '%i_%i.dat'%(slice1,slice2))
         
     with open(command, 'w') as file:
         file.write(filedata)
