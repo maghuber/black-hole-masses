@@ -83,27 +83,28 @@ def Mbh_bulge(Mbulge,a,b):
     logMbh_scatter = np.random.normal(logMbh, scatter_b)
     return logMbh_scatter
 
-errors = Table.read(in_file,
+table = Table.read(in_file,
         format="ascii")
 
 indices = np.s_[args.slice1:args.slice2]
     
-objid = np.asarray(errors['objID'][indices],dtype=str)
-logMb = np.asarray(errors['logMb'][indices],dtype=float)
-b_logMb = np.asarray(errors['b_logMb'][indices],dtype=float)
-B_logMb = np.asarray(errors['B_logMb'][indices],dtype=float)
-sig1_Mb = np.asarray(errors['sig1_Mb'][indices],dtype=float)
-sig2_Mb = np.asarray(errors['sig2_Mb'][indices],dtype=float)
-sig1_Mt = np.asarray(errors['sig1_Mt'][indices],dtype=float)
-sig2_Mt = np.asarray(errors['sig1_Mt'][indices],dtype=float)
-logMt = np.asarray(errors['logMt'][indices],dtype=float)
-b_logMt = np.asarray(errors['b_logMt'][indices],dtype=float)
-B_logMt = np.asarray(errors['B_logMt'][indices],dtype=float)
-ng = np.asarray(errors['ng'][indices],dtype=float)
-e_ng = np.asarray(errors['e_ng'][indices],dtype=float)
-Rhl = np.asarray(errors['Rhlr'][indices],dtype=float)
-e = np.asarray(errors['e'][indices],dtype=float)
-e_e = np.asarray(errors['e_e'][indices],dtype=float)
+objid = np.asarray(table['objID'][indices],dtype=str)
+logMb = np.asarray(table['logMb'][indices],dtype=float)
+b_logMb = np.asarray(table['b_logMb'][indices],dtype=float)
+B_logMb = np.asarray(table['B_logMb'][indices],dtype=float)
+sig1_Mb = np.asarray(table['sig1_Mb'][indices],dtype=float)
+sig2_Mb = np.asarray(table['sig2_Mb'][indices],dtype=float)
+sig1_Mt = np.asarray(table['sig1_Mt'][indices],dtype=float)
+sig2_Mt = np.asarray(table['sig1_Mt'][indices],dtype=float)
+logMt = np.asarray(table['logMt'][indices],dtype=float)
+b_logMt = np.asarray(table['b_logMt'][indices],dtype=float)
+B_logMt = np.asarray(table['B_logMt'][indices],dtype=float)
+ng = np.asarray(table['ng'][indices],dtype=float)
+e_ng = np.asarray(table['e_ng'][indices],dtype=float)
+Rhl = np.asarray(table['Rhlr'][indices],dtype=float)
+e = np.asarray(table['e'][indices],dtype=float)
+e_e = np.asarray(table['e_e'][indices],dtype=float)
+false_disk = np.asarray(table['false_disk'][indices],dtype=int)
 
 logMb_dist = make_distribution(logMb,sig1_Mb,sig2_Mb,n_draws)
 logMt_dist = make_distribution(logMt,sig1_Mt,sig2_Mt,n_draws)
@@ -123,7 +124,10 @@ for i in np.arange(n_galaxies):
         alpha = alpha_s_dist[i][j]
         beta = beta_s_dist[i][j]
         r_e = Rhl[i]*np.sqrt(1-e[i])
-        Mtot = 10**(logMt_dist[i][j])
+        if false_disk[i] == 1:
+            Mtot = 10**(logMb_dist[i][j])
+        else:
+            Mtot = 10**(logMt_dist[i][j])
         logMbh_s_dist[i][j] = Mbh_sigma(Mtot,ng[i],r_e,alpha,beta)
         
 logMbh_b_dist = np.zeros((n_galaxies,n_draws))
