@@ -13,8 +13,8 @@ for i in range(513):
         filedata = file.read()
         
     filedata = filedata.replace('--slice1=513000', '--slice1=%i'%(slice1))
-    filedata = filedata.replace('--slice2=596', '--slice2=%i'%(slice2))
-    filedata = filedata.replace('513000_513596.dat', '%i_%i.dat'%(slice1,slice2))
+    filedata = filedata.replace('--slice2=513994', '--slice2=%i'%(slice2))
+    filedata = filedata.replace('513000_513994.dat', '%i_%i.dat'%(slice1,slice2))
         
     with open(command, 'w') as file:
         file.write(filedata)
