@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --partition=amilan
+#SBATCH --partition=atesting
 #SBATCH --nodes=1
 #SBATCH --ntasks=32
 #SBATCH --time=24:00:00
