@@ -2,7 +2,7 @@
 #SBATCH --partition=atesting
 #SBATCH --nodes=1
 #SBATCH --ntasks=32
-#SBATCH --time=24:00:00
+#SBATCH --time=5:00:00
 #SBATCH --qos=normal	      			
 #SBATCH --output=/scratch/alpine/mahu8801/output/python_%j.out
 
