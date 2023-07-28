@@ -1,6 +1,7 @@
 from astropy.cosmology import WMAP9 as cosmo
 import scipy.integrate as integrate
 from astropy import constants as const
+from astropy.io import ascii
 from astropy.table import Table
 import argparse
 
