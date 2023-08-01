@@ -13,4 +13,4 @@ conda activate blackhole_env
 
 # Run Python Script
 cd /scratch/alpine/mahu8801/blackhole_data/scripts
-python calculate_Vmax.py i='/scratch/alpine/mahu8801/blackhole_data/photometry.dat' --o='/scratch/alpine/mahu8801/blackhole_data/data/Vmax.dat'
+python calculate_Vmax.py --i='/scratch/alpine/mahu8801/blackhole_data/photometry.dat' --o='/scratch/alpine/mahu8801/blackhole_data/data/Vmax.dat'
