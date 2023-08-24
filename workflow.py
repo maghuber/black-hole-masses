@@ -1,9 +1,12 @@
 import subprocess 
 import os
 
-for i in range(513):
+for i in range(512):
     slice1 = i*1000
     slice2 = (i+1)*1000
+    if i == 512:
+        slice1 = i*1000
+        slice2 = 512821
     
     command = "/scratch/alpine/mahu8801/blackhole_data/scripts/commands/%i_%i.sh"%(slice1,slice2)
     outfile = '/scratch/alpine/mahu8801/blackhole_data/data/%i_%i.dat'%(slice1,slice2)

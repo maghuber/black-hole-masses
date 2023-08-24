@@ -13,6 +13,8 @@ parser.add_argument("--slice2",type=int,default=1000,
                     help="upper slice of galaxy table")
 parser.add_argument("--ndraws",type=int,
                     help="number of random draws")
+parser.add_argument("--relation",type=str,default='mconnellma',
+                    help="which scaling relation to use")
 parser.add_argument("--i",type=str,
                     help="input file")
 parser.add_argument("--o",type=str,
@@ -23,20 +25,34 @@ n_draws = args.ndraws
 n_galaxies = args.slice2 - args.slice1
 in_file = args.i
 out_file = args.o
+relation = args.relation
 
-# mcconnell and ma coefficients
-# M-sigma for all galaxies
-alpha_s = 8.32
-e_alpha_s = 0.05
-beta_s = 5.64
-e_beta_s = 0.32
-scatter_s = 0.38
-# M-Mbulge for dynamical masses
-alpha_b = 8.46
-e_alpha_b = 0.08
-beta_b = 1.05
-e_beta_b = 0.11
-scatter_b = 0.34
+if relation == 'mconnellma':
+    # M-sigma for all galaxies
+    alpha_s = 8.32
+    e_alpha_s = 0.05
+    beta_s = 5.64
+    e_beta_s = 0.32
+    scatter_s = 0.38
+    # M-Mbulge for dynamical masses
+    alpha_b = 8.46
+    e_alpha_b = 0.08
+    beta_b = 1.05
+    e_beta_b = 0.11
+    scatter_b = 0.34
+if relation == 'kormendyho':
+    # M-sigma
+    alpha_s = 8.49
+    e_alpha_s = 0.049
+    beta_s = 4.377
+    e_beta_s = 0.29
+    scatter_s = 0.29
+    # M-Mbulge
+    alpha_b = 8.69
+    e_alpha_b = 0.04
+    beta_b = 1.16
+    e_beta_b = 0.06
+    scatter_b = 0.29
 # constants
 Msun = 1.988435e30
 kpctokm = 3.086e16
