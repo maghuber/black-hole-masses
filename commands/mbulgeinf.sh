@@ -15,4 +15,4 @@ conda activate blackhole_env
 
 # Run Python Script
 cd /scratch/alpine/mahu8801/blackhole_data/scripts
-python mbulge_inf.py --slice1=512000 --slice2=512821 --ndraws=500 --i='/scratch/alpine/mahu8801/blackhole_data/mbulgeinf.dat' --o='/scratch/alpine/mahu8801/blackhole_data/data/512000_512821.dat'
+python mbulge_inf.py --slice1=s1 --slice2=s2 --ndraws=500 --i='/scratch/alpine/mahu8801/blackhole_data/mbulgeinf.dat' --o='/scratch/alpine/mahu8801/blackhole_data/data/s1_s2.dat'
