@@ -93,8 +93,6 @@ rg2d = np.asarray(table['rg2d'][indices],dtype=float)
 logMt_dist = make_distribution(logMt,sig1_Mt,sig2_Mt,n_draws)
 
 # make coefficient distributions
-alpha_s_dist = make_distribution_normal(np.full((n_galaxies,),alpha_s),np.full((n_galaxies,),e_alpha_s),n_draws)
-beta_s_dist = make_distribution_normal(np.full((n_galaxies,),beta_s),np.full((n_galaxies,),e_beta_s),n_draws)
 alpha_b_dist = make_distribution_normal(np.full((n_galaxies,),alpha_b),np.full((n_galaxies,),e_alpha_b),n_draws)
 beta_b_dist = make_distribution_normal(np.full((n_galaxies,),beta_b),np.full((n_galaxies,),e_beta_b),n_draws)
 
@@ -102,7 +100,7 @@ beta_b_dist = make_distribution_normal(np.full((n_galaxies,),beta_b),np.full((n_
 logMb_inf_dist = np.zeros((n_galaxies,n_draws))
 for i in np.arange(n_galaxies):
     for j in np.arange(n_draws):
-        gg = gg2d[i]
+        gg = gg2d[i].,lmkg
         rg = rg2d[i]
         Mt = logMt_dist[i][j]
         logMb_inf_dist[i][j] = Mbulge_inf(Mt,gg,rg)
