@@ -48,7 +48,7 @@ class twosided_gaussian(rv_continuous):
 
 def make_distribution(quantity,s1,s2,s):
     errordist = np.zeros((len(quantity),s))
-    test_rvs = twosided_gaussian(a=5,b=12)
+    test_rvs = twosided_gaussian(a=4,b=13)
     for i, q in enumerate(quantity):
         test_draws = test_rvs.rvs(mu=quantity[i], sig1=s1[i], sig2=s2[i], size=s)
         errordist[i] = (test_draws)
@@ -100,7 +100,7 @@ beta_b_dist = make_distribution_normal(np.full((n_galaxies,),beta_b),np.full((n_
 logMb_inf_dist = np.zeros((n_galaxies,n_draws))
 for i in np.arange(n_galaxies):
     for j in np.arange(n_draws):
-        gg = gg2d[i].,lmkg
+        gg = gg2d[i]
         rg = rg2d[i]
         Mt = logMt_dist[i][j]
         logMb_inf_dist[i][j] = Mbulge_inf(Mt,gg,rg)
