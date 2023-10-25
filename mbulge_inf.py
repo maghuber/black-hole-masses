@@ -73,9 +73,9 @@ def Mbulge_inf(logMt,g,r):
     color_cut = 0.06*logMt-0.01
     gr_color = abs(g-r)
     if gr_color > color_cut:
-        logMb_inf = 1.*logMt
+        logMb_inf = np.log(1.*10**logMt)
     else:
-        logMb_inf = 0.31*logMt
+        logMb_inf = np.log(0.31*10**logMt)
     return logMb_inf
 
 table = Table.read(in_file,
