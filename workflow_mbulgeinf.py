@@ -1,7 +1,7 @@
 import subprocess 
 import os
 
-for i in range(512):
+for i in range(513):
     slice1 = i*1000
     slice2 = (i+1)*1000
     if i == 512:
